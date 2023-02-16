@@ -1,0 +1,137 @@
+package com.example.main;
+
+import java.awt.Color;
+import java.io.FileOutputStream;
+import java.sql.*;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.Font;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPRow;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+
+@SpringBootApplication
+public class DBtoPdfInSingleClassApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(DBtoPdfInSingleClassApplication.class, args);
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/excel", "root",
+					"bedaprakash123@");
+			Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			ResultSet rs = st.executeQuery("select * from product");
+
+			ResultSetMetaData metaData = rs.getMetaData();
+			int columnName = metaData.getColumnCount();
+			
+			
+
+			Document document = new Document(PageSize.A4);
+			String downloadPath = "C:\\Users\\RSTPL076\\Desktop\\DatabaseProduct.pdf";
+			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(downloadPath));
+
+			document.open();
+			Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+			font.setSize(18);
+			font.setColor(Color.BLUE);
+             
+			Paragraph p = new Paragraph("List of Products", font);
+			p.setAlignment(Paragraph.ALIGN_CENTER);
+
+			document.add(p);
+
+			PdfPTable table = new PdfPTable(7);
+			
+			
+			
+			table.setWidthPercentage(100f);
+			table.setWidths(new float[] { 1.0f, 1.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f });
+			table.setSpacingBefore(10);
+			
+			
+
+
+			PdfPCell cell = new PdfPCell();
+			cell.setBackgroundColor(Color.BLUE);
+			cell.setPadding(5);
+
+			font.setColor(Color.WHITE);
+
+			for (int i = 1; i <= columnName; i++) {
+				String columnNameee = metaData.getColumnName(i);
+
+				cell.setPhrase(new Phrase(columnNameee, font));
+				table.addCell(cell);
+				
+			}
+			
+
+			
+			
+			while (rs.next()) {
+				
+				
+				cell.setPhrase(new Phrase(rs.getString("product_id")));
+				table.addCell(cell);
+				cell.setPhrase(new Phrase(rs.getString("product_desc")));
+				table.addCell(cell);
+				cell.setPhrase(new Phrase(rs.getString("product_name")));
+				table.addCell(cell);
+				cell.setPhrase(new Phrase(rs.getString("product_price")));
+				table.addCell(cell);
+				cell.setPhrase(new Phrase(rs.getString("product_discount")));
+				table.addCell(cell);
+				cell.setPhrase(new Phrase(rs.getString("product_value")));
+				table.addCell(cell);
+				cell.setPhrase(new Phrase(rs.getString("product_thing")));
+				table.addCell(cell);
+				
+				
+				
+//				
+//				table.addCell(rs.getString("product_id"));
+//				table.addCell(rs.getString("product_desc"));
+//				table.addCell(rs.getString("product_name"));
+//				table.addCell(rs.getString("product_price"));
+//				table.addCell(rs.getString("product_discount"));
+//				table.addCell(rs.getString("product_value"));
+//				table.addCell(rs.getString("product_thing"));
+//				
+//				PdfPRow row = new PdfPRow(new PdfPCell[]{cell1});
+				
+				
+				
+//				document.add(table);
+				
+				
+			}
+			
+//			document.add(table);
+					
+//			}
+			
+
+			
+			
+			System.out.println("Downloaded Successfully.......!!");
+			document.add(table);
+			writer.close();
+			document.close();
+			conn.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
+}

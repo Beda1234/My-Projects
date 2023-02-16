@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>User Dashboard</title>
+</head>
+<section>
+    <div class="card mr-3 ml-3">
+
+        <div class="card-body">
+
+            <h1 class="text-center">Add Event</h1>
+            <div class="container-fluid mt-2">
+                <div class="col-md-10 offset-md-1">
+                    <form action="#" th:object="${event}" enctype="multiport/form-data" method="post"
+                        th:action="@{/user/process-event}" class="mt-2 ">
+                        <!-- Event Name  -->
+                       
+                        
+                        <div class="input-group">
+
+                            <div class="input-group-prepend">
+
+                                <div class="input-group-text ">
+
+                                    <i class="fa fa-plus"></i>
+
+                                </div>
+
+                            </div>
+
+                            <input required type="text" id="eventname" name="eventname" placeholder="Enter Event Name "
+                                class="form-control" />
+
+                        </div>
+
+                        <!-- Event Title-->
+                       
+                        
+                        <div class="input-group mt-3">
+
+                            <div class="input-group-prepend">
+
+                                <div class="input-group-text ">
+
+                                    <i class="fa fa-plus"></i>
+
+                                </div>
+
+                            </div>
+
+                            <input required type="text" id="eventtitle" name="eventtitle"
+                                placeholder="Enter Event Title " class="form-control" />
+
+                        </div>
+
+                        <!-- Enter Event Description-->
+                         
+                        
+                        <div class="input-group mt-3">
+
+                            <div class="input-group-prepend">
+
+                                <div class="input-group-text ">
+
+                                    <i class="fa fa-plus"></i>
+
+                                </div>
+
+                            </div>
+
+                            <input required type="text" id="eventdescription" name="eventdescription"
+                                placeholder="Enter Event Description-- " class="form-control" />
+
+                        </div>
+
+                        <!-- Enter event start date-->
+                        
+                        <label class="form-label">Event Start Date</label>
+                        <div class="input-group">
+
+                            <div class="input-group-prepend">
+
+                                <div class="input-group-text ">
+
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+
+                                </div>
+
+                            </div>
+
+                            <input required type="datetime-local" id="eventstartdate" name="eventstartdate"
+                                placeholder="Enter Event Start Date With Time-- " class="form-control" />
+
+                        </div>
+
+                        <!-- Enter event end date-->
+                        
+                        <label class="form-label">Event end Date</label>
+                    
+                        <div class="input-group ">
+
+                            <div class="input-group-prepend">
+
+                                <div class="input-group-text ">
+
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+
+                                </div>
+
+                            </div>
+
+                            <input required type="datetime-local" id="eventenddate" name="eventenddate"
+                                placeholder="Enter Event End Date With Time-- " class="form-control" />
+
+                        </div>
+
+
+
+                    </form>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<body>
+</body>
+
+</html>

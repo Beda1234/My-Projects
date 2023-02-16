@@ -1,0 +1,24 @@
+package com.example.main.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class Product {
+	@Id
+	private int product_id;
+	
+	private String product_name;
+	
+	private String product_company;
+	
+	private String product_price;
+
+	
+
+	
+
+	
+	
+
+}

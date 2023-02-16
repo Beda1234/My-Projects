@@ -1,0 +1,26 @@
+{
+  "name": "react_practice",
+  "version": "1.0.0",
+  "description": "React single page application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "single",
+    "page",
+    "application"
+  ],
+  "author": "Beda Prakash",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/standalone": "^7.20.12",
+    "Babel": "^0.0.1",
+    "bootstrap": "^5.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3"
+  }
+}

@@ -1,0 +1,82 @@
+package com.example.main;
+
+import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+@SpringBootApplication
+public class DBtoPdfInSingleClass1Application {
+
+	public static void main(String[] args) {
+		try {
+            /* Create Connection objects */
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/excel", "root", "bedaprakash123@");
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from product");
+            ResultSetMetaData rsMetaData = rs.getMetaData();
+            int count = rsMetaData.getColumnCount();
+
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\RSTPL076\\Desktop\\DatabaseProduct.pdf"));
+            document.open();
+
+            PdfPTable pdfPTable = new PdfPTable(count);
+            // Setting Headers
+            for(int i = 1; i<=count; i++) {
+                pdfPTable.addCell(rsMetaData.getColumnName(i).toUpperCase());
+            }
+
+            //create a cell object
+            PdfPCell pdfPCell;
+
+            while (rs.next()) {
+
+                pdfPCell = new PdfPCell(new Phrase(rs.getString("product_id")));
+                pdfPTable.addCell(pdfPCell);
+
+                pdfPCell = new PdfPCell(new Phrase( rs.getString("product_desc")));
+                pdfPTable.addCell(pdfPCell);
+
+                pdfPCell = new PdfPCell(new Phrase( rs.getString("product_name")));
+                pdfPTable.addCell(pdfPCell);
+
+                pdfPCell = new PdfPCell(new Phrase(rs.getString("product_price")));
+                pdfPTable.addCell(pdfPCell);
+                
+                pdfPCell = new PdfPCell(new Phrase(rs.getString("product_discount")));
+                pdfPTable.addCell(pdfPCell);
+                
+                pdfPCell = new PdfPCell(new Phrase(rs.getString("product_value")));
+                pdfPTable.addCell(pdfPCell);
+                
+                pdfPCell = new PdfPCell(new Phrase(rs.getString("product_thing")));
+                pdfPTable.addCell(pdfPCell);
+            }
+            /* Attach report table to PDF */
+            document.add(pdfPTable);
+            document.close();
+            
+            /* Close all DB related objects */
+            rs.close();
+            stmt.close();
+            conn.close();
+            System.out.println("downloaded successfully");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+	}
+
+}

@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "tables.to.check.table",
+  "type": "java.lang.String",
+  "description": "A description for 'tables.to.check.table'"
+}]}

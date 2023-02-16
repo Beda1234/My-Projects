@@ -1,0 +1,5 @@
+package com.events.main.dao;
+
+public interface EventsDao {
+
+}

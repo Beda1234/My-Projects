@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename Java project &apos;libapi&apos; to &apos;excel&apos;&#x0D;&#x0A;- Original element: &apos;libapi&apos;&#x0D;&#x0A;- Renamed element: &apos;libapi&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename Java project &apos;libapi&apos;" flags="7" id="org.eclipse.jdt.ui.rename.java.project" input="=libapi" name="excel" references="true" stamp="1672118237965" version="1.0"/>
+</session>

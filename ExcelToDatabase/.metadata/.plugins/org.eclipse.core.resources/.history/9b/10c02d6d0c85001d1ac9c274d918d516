@@ -1,0 +1,5 @@
+package com.example.main.message;
+
+public class ResponseMessage {
+
+}

@@ -1,0 +1,5 @@
+package com.api.exceptionHandler;
+
+public class FileUploadExceptionAdvice {
+
+}

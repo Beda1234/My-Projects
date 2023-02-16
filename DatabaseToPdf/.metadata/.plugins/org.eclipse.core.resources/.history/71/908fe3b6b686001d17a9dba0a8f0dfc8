@@ -1,0 +1,12 @@
+package com.example.main.pdf;
+
+import java.util.List;
+
+
+public class ProductColumn {
+	private List<String> listColumns;
+	public ProductColumn(List<String> listColumns) {
+		this.listColumns=listColumns;
+	}
+
+}

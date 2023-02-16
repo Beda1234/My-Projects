@@ -1,0 +1,79 @@
+package com.events.main.services;
+
+import java.text.Collator;
+import java.util.ArrayList;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.events.main.entity.Events;
+
+@Service
+public class EventsServiceClass implements EventsService {
+	
+	List<Events> list;
+	
+	public EventsServiceClass()
+	{
+		list= new ArrayList<>();
+		list.add(new Events(32,"(12/08/2022)","Ganesh Puja","festival"));
+		list.add(new Events(31,"(14/09/2022)","saraswati Puja","festival"));
+	}
+
+	@Override
+	public List<Events> getEvents() {
+
+		return list;
+	}
+
+	@Override
+	public Events getEvents(int eventsId) {
+
+		Events e=null;
+		for(Events events:list)
+		{
+			if(events.getEvent_Id()==eventsId)
+           {
+	         e=events;
+	         break;
+           }
+
+        }
+		return e;
+	}
+
+	@Override
+	public Events addEvents(Events event) {
+
+		list.add(event);
+		return event;
+	}
+
+	
+	@Override
+	public Events updateEvents(Events event) {
+
+		list.forEach(e ->
+        {
+        	if(e.getEvent_Date() == event.getEvent_Date())
+        	{
+        		e.setEvent_Name(event.getEvent_Name());
+        		e.setEvent_Description(event.getEvent_Description());
+        	}
+        });
+		return event;
+	}
+
+	
+	@Override
+	public Events deleteEvent(String event_Date) {
+
+		list=this.list.stream().filter(e-> e.getEvent_Date()! = event_Date).collect(Collator.toList());
+		return null;
+	}
+
+	
+	}
+
+
